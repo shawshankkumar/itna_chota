@@ -4,18 +4,17 @@ import { createLink, fetchLink } from './controller';
 const app = Router();
 
 export const routerHandler = () => {
-  const app2 = Router();
-  app2.get('/link', (req: express.Request, res: express.Response) => {
+  app.get('/', (req: express.Request, res: express.Response) => {
     //test
-    res.send('Hi');
+    res.send('Hein');
   });
-  app2.post('/create', createLinkHandler);
-  app2.get('/:code', fetchLinkHandler);
+  app.post('/create', createLinkHandler);
+  app.get('/:code', fetchLinkHandler);
   return app;
 };
 
 const createLinkHandler = (req: express.Request, res: express.Response) => {
-  createLink(req.body as string)
+  createLink(req.body.url as string)
     .then(code => {
       res.json(code);
     })
@@ -27,7 +26,7 @@ const createLinkHandler = (req: express.Request, res: express.Response) => {
 const fetchLinkHandler = (req: express.Request, res: express.Response) => {
   fetchLink(req.params.code as string)
     .then(link => {
-      res.redirect(link);
+      res.status(301).redirect(link.url);
     })
     .catch(error => {
       res.status(error.code).json({ success: false, message: error.message });

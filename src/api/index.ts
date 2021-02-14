@@ -4,12 +4,10 @@ export default (): Router => {
   const app = Router();
 
   //TODO: add routes here...
-  app.use('/hi', (req: Request, res: Response) => {
-    res.send('Hi');
+  app.use('/test', (req: Request, res: Response) => {
+    res.send('Test successful');
   });
-  app.use('/hello', (req: Request, res: Response) => {
-    res.send('Hello');
-  });
-  app.use('/link', routerHandler);
+
+  app.use('/link', routerHandler());
   return app;
 };
