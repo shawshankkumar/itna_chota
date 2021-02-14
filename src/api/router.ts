@@ -19,7 +19,7 @@ const createLinkHandler = (req: express.Request, res: express.Response) => {
       res.json(code);
     })
     .catch(error => {
-      res.status(error.code).json({ success: false, message: error.message });
+      res.status(error.code).json({ code: error.code, success: false, message: error.message });
     });
 };
 
@@ -29,6 +29,6 @@ const fetchLinkHandler = (req: express.Request, res: express.Response) => {
       res.status(301).redirect(link.url);
     })
     .catch(error => {
-      res.status(error.code).json({ success: false, message: error.message });
+      res.status(error.code).json({ code: error.code, success: false, message: error.message });
     });
 };
