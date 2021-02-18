@@ -2,6 +2,7 @@ import { fileURLToPath } from 'url';
 import db from '../loaders/database';
 import { customAlphabet } from 'nanoid';
 const nanoid = customAlphabet('abcdefghijklmnopqrstuvwxyz1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ', 6);
+
 export const createLink = async (data: string) => {
   try {
     if (data === null) throw { code: '409', message: 'There is no link' };
@@ -14,7 +15,7 @@ export const createLink = async (data: string) => {
     }
     if (!((await (await db()).collection('itnachota').findOne({ url: data })) === null)) {
       let store = await (await db()).collection('itnachota').findOne({ url: data });
-      console.log(store);
+      console.log(store.urlCode);
       return store;
     }
     let storeUrl = {
