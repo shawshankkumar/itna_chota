@@ -1,12 +1,22 @@
 import express, { Router, Request, Response } from 'express';
 import { createLink, fetchLink } from './controller';
+import config from './../config/index';
+import urljoin from 'url-join';
+
 const bodyParser = require('body-parser');
 
 const app = express();
+
 app.use(bodyParser.urlencoded({ extended: true }));
 
-let path = 'C:/URL Short/intachota/src/views';
-app.set('views', path);
+let path = require('path');
+let dirname = __dirname;
+let l = dirname.length;
+let path3 = dirname.substring(0, l - 10);
+let path1 = path.join(path3, '/src', '/views');
+
+app.set('views', path1);
+
 app.set('view engine', 'ejs');
 export const routerHandler = () => {
     app.get('/test', (req: express.Request, res: express.Response) => {
@@ -14,7 +24,7 @@ export const routerHandler = () => {
         res.render('hein');
     });
     app.get('/', landingPage);
-    app.post('/create', createLinkHandler);
+    app.post('/display', createLinkHandler);
     app.get('/:code', fetchLinkHandler);
     app.get('/display/:code', display);
     return app;
@@ -23,7 +33,11 @@ export const routerHandler = () => {
 const createLinkHandler = (req: express.Request, res: express.Response) => {
     createLink(req.body.link as string)
         .then(code => {
-            let url = 'http://localhost:3000/api/link/display/' + code;
+            let portno = config.port;
+            let portno1 = portno.toString();
+            let url2 = 'http://localhost:' + portno1 + '/api/link/display/';
+            console.log(url2);
+            let url = url2 + code;
             console.log(url);
             res.redirect(url);
         })
@@ -33,7 +47,9 @@ const createLinkHandler = (req: express.Request, res: express.Response) => {
 };
 
 const display = (req: express.Request, res: express.Response) => {
-    let url = 'http://localhost:3000/api/link/' + req.params.code;
+    let portno = config.port;
+    let portno1 = portno.toString();
+    let url = 'http://localhost:' + portno1 + '/api/link/' + req.params.code;
     console.log(url);
     res.render('code', { url: url });
 };
@@ -49,5 +65,8 @@ const fetchLinkHandler = (req: express.Request, res: express.Response) => {
 };
 
 const landingPage = (req: express.Request, res: express.Response) => {
-    res.render('index');
+    let portno = config.port;
+    let portno1 = portno.toString();
+    let url = 'http://localhost:' + portno1 + '/api/link/' + req.params.code;
+    res.render('index', { url: url });
 };

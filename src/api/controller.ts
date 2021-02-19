@@ -1,6 +1,7 @@
 import { fileURLToPath } from 'url';
 import db from '../loaders/database';
 import { customAlphabet } from 'nanoid';
+
 const nanoid = customAlphabet('abcdefghijklmnopqrstuvwxyz1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ', 6);
 
 export const createLink = async (data: string) => {
