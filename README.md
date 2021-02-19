@@ -4,13 +4,19 @@
 
 This project is still a work under progrees. 
 
-This project uses mongoDB so you need to add a `.env` file and enter MONGODB_URL=url
+The front-end part of the application is still underdevelopement but if you wish to try the app nevertheless, clone and do the following:
 
 To run this, 
 
 * yarn install
 * yarn build
 * yarn start 
-* go to localhost:3000/api/link/ 
+* go to localhost:5050/api/link/ 
 
 and boom. You are good to go.
+
+This project uses mongoDB so you need to add a `.env` file and enter MONGODB_URL=url
+You can set up your own mongoDB atlas and enter the url in .env or contact the owner of this repository for a demo.
+The default port is set at `5050` but can be modified in the `.env` file as `port=3000` (we are using 3000 in this case). 
+
+
