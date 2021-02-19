@@ -6,7 +6,7 @@ export default {
     /**
      * Port the app should run on
      */
-    port: parseInt(process.env.PORT) || 3000,
+    port: parseInt(process.env.PORT) || 5050,
 
     /**
      * Database the app should connect to
