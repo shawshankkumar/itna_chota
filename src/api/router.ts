@@ -1,12 +1,18 @@
 import express, { Router, Request, Response } from 'express';
 import { createLink, fetchLink } from './controller';
 const bodyParser = require('body-parser');
-
+import config from './../config/index';
+import urljoin from 'url-join';
 const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
+let path = require('path');
+let dirname = __dirname;
+let l = dirname.length;
+let path3 = dirname.substring(0, l - 10);
+let path1 = path.join(path3, '/src', '/views');
+console.log(path1);
+app.set('views', path1);
 
-let path = 'C:/URL Short/intachota/src/views';
-app.set('views', path);
 app.set('view engine', 'ejs');
 export const routerHandler = () => {
     app.get('/test', (req: express.Request, res: express.Response) => {
@@ -23,6 +29,10 @@ export const routerHandler = () => {
 const createLinkHandler = (req: express.Request, res: express.Response) => {
     createLink(req.body.link as string)
         .then(code => {
+            let portno = config.port;
+            let portno1 = portno.toString();
+            let url2 = urljoin('http://localhost:', portno1, '/api/link/display');
+            console.log(url2);
             let url = 'http://localhost:3000/api/link/display/' + code;
             console.log(url);
             res.redirect(url);
