@@ -33,13 +33,13 @@ export const routerHandler = () => {
 const createLinkHandler = (req: express.Request, res: express.Response) => {
     createLink(req.body.link as string)
         .then(code => {
-            let portno = config.port;
-            let portno1 = portno.toString();
-            let url2 = 'http://localhost:' + portno1 + '/api/link/display/';
-            console.log(url2);
-            let url = url2 + code;
-            console.log(url);
-            res.redirect(url);
+            // let portno = config.port;
+            // let portno1 = portno.toString();
+            // let url2 = 'http://localhost:' + portno1 + '/api/link/display/';
+            // console.log(url2);
+            // let url = url2 + code;
+            // console.log(url);
+            res.redirect('/api/link/display' + '/' + code);
         })
         .catch(error => {
             res.status(error.code).json({ code: error.code, success: false, message: error.message });
