@@ -18,7 +18,7 @@ export default (): Router => {
     });
 
     app.use('/link/', routerHandler());
-
+    //alexa ka kaam
     app.get('*', (req: Request, res: Response) => {
         res.render('error');
     });
