@@ -44,7 +44,6 @@ const display = (req: express.Request, res: express.Response) => {
     let portno = config.port;
     let portno1 = portno.toString();
     let url = 'http://localhost:' + portno1 + '/api/link/' + req.params.code;
-    console.log(url);
     res.render('code', { url: url });
 };
 
