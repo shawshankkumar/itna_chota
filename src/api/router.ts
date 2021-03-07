@@ -33,7 +33,8 @@ export const routerHandler = () => {
 const createLinkHandler = (req: express.Request, res: express.Response) => {
     createLink(req.body.link as string)
         .then(code => {
-            res.redirect('display/' + code);
+            res.redirect(`display/${code}`);
+            // res.redirect('https://www.youtube.com');
         })
         .catch(error => {
             res.status(error.code).json({ code: error.code, success: false, message: error.message });
@@ -43,7 +44,7 @@ const createLinkHandler = (req: express.Request, res: express.Response) => {
 const display = (req: express.Request, res: express.Response) => {
     let portno = config.port;
     let portno1 = portno.toString();
-    let url = 'http://localhost:' + portno1 + '/api/link/' + req.params.code;
+    let url = 'http://localhost:' + portno1 + '/' + req.params.code;
     res.render('code', { url: url });
 };
 

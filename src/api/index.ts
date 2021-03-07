@@ -13,14 +13,8 @@ export default (): Router => {
     app.set('view engine', 'ejs');
 
     //TODO: add routes here...
-    app.use('/test', (req: Request, res: Response) => {
-        res.send('Test successful');
-    });
 
-    app.use('/link/', routerHandler());
+    app.use(routerHandler());
     //alexa ka kaam
-    app.get('*', (req: Request, res: Response) => {
-        res.render('error');
-    });
     return app;
 };
