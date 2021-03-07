@@ -23,7 +23,6 @@ export const createLink = async (data: string) => {
             urlCode: nanoid(),
             url: data,
         };
-        console.log(storeUrl);
         await (await db()).collection('itnachota').insertOne(storeUrl);
         return storeUrl.urlCode;
     } catch (error) {
@@ -33,7 +32,6 @@ export const createLink = async (data: string) => {
 };
 export const fetchLink = async (data: string) => {
     try {
-        console.log(data);
         let storeUrl = await (await db()).collection('itnachota').findOne({ urlCode: data });
         if (storeUrl === undefined) {
             throw { code: '404', message: 'could not find the url' };
