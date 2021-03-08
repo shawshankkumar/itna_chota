@@ -33,13 +33,8 @@ export const routerHandler = () => {
 const createLinkHandler = (req: express.Request, res: express.Response) => {
     createLink(req.body.link as string)
         .then(code => {
-            let portno = config.port;
-            let portno1 = portno.toString();
-            let url2 = 'http://localhost:' + portno1 + '/api/link/display/';
-            console.log(url2);
-            let url = url2 + code;
-            console.log(url);
-            res.redirect(url);
+            res.redirect(`display/${code}`);
+            // res.redirect('https://www.youtube.com');
         })
         .catch(error => {
             res.status(error.code).json({ code: error.code, success: false, message: error.message });
@@ -49,8 +44,7 @@ const createLinkHandler = (req: express.Request, res: express.Response) => {
 const display = (req: express.Request, res: express.Response) => {
     let portno = config.port;
     let portno1 = portno.toString();
-    let url = 'http://localhost:' + portno1 + '/api/link/' + req.params.code;
-    console.log(url);
+    let url = 'http://localhost:' + portno1 + '/' + req.params.code;
     res.render('code', { url: url });
 };
 
@@ -65,8 +59,5 @@ const fetchLinkHandler = (req: express.Request, res: express.Response) => {
 };
 
 const landingPage = (req: express.Request, res: express.Response) => {
-    let portno = config.port;
-    let portno1 = portno.toString();
-    let url = 'http://localhost:' + portno1 + '/api/link/' + req.params.code;
-    res.render('index', { url: url });
+    res.render('index');
 };

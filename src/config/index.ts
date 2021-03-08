@@ -1,7 +1,7 @@
 require('dotenv').config();
 
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
-
+console.log(process.env.PORT);
 export default {
     /**
      * Port the app should run on
