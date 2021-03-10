@@ -44,7 +44,8 @@ const createLinkHandler = (req: express.Request, res: express.Response) => {
 const display = (req: express.Request, res: express.Response) => {
     let portno = config.port;
     let portno1 = portno.toString();
-    let url = 'http://localhost:' + portno1 + '/' + req.params.code;
+    // let url = 'http://localhost:' + portno1 + '/' + req.params.code;
+    let url = 'https://itnachota.herokuapp.com/' + req.params.code;
     res.render('code', { url: url });
 };
 
