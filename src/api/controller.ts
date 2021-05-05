@@ -1,4 +1,3 @@
-import { fileURLToPath } from 'url';
 import db from '../loaders/database';
 import { customAlphabet } from 'nanoid';
 
@@ -7,7 +6,6 @@ const nanoid = customAlphabet('abcdefghijklmnopqrstuvwxyz1234567890ABCDEFGHIJKLM
 export const createLink = async (data: string) => {
     try {
         if (data === null) throw { code: '409', message: 'There is no link' };
-
         if (!data.startsWith('http')) {
             data = 'http://' + data;
         }

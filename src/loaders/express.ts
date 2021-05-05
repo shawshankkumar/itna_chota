@@ -36,5 +36,5 @@ export default ({ app }: { app: express.Application }): void => {
     app.use(bodyParser.json());
 
     // Load API routes
-    app.use(routes());
+    app.use('/api', routes());
 };
