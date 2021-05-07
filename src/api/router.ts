@@ -27,7 +27,7 @@ const createLinkHandler = (req: express.Request, res: express.Response) => {
 const fetchLinkHandler = (req: express.Request, res: express.Response) => {
     fetchLink(req.query.code as string)
         .then(link => {
-            res.status(200).json({ link: link.url, success: true, message: 'original link fetched' });
+            res.status(200).json({ link: link, success: true, message: 'original link fetched' });
         })
         .catch(error => {
             res.status(error.code).json({ code: error.code, success: false, message: error.message });
