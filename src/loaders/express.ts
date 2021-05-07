@@ -2,7 +2,6 @@ import bodyParser from 'body-parser';
 import cors from 'cors';
 import * as express from 'express';
 import helmet from 'helmet';
-import config from '../config';
 import routes from '../api';
 
 export default ({ app }: { app: express.Application }): void => {
