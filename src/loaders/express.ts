@@ -2,7 +2,6 @@ import bodyParser from 'body-parser';
 import cors from 'cors';
 import * as express from 'express';
 import helmet from 'helmet';
-import config from '../config';
 import routes from '../api';
 
 export default ({ app }: { app: express.Application }): void => {
@@ -36,5 +35,8 @@ export default ({ app }: { app: express.Application }): void => {
     app.use(bodyParser.json());
 
     // Load API routes
-    app.use(routes());
+    app.use('/api', routes());
+    app.get('*', (req, res) => {
+        res.redirect('https://itnachota.vercel.app/');
+    });
 };

@@ -6,9 +6,7 @@ import Logger from './loaders/logger';
 
 async function startServer() {
     const app = express();
-
     await Loaders({ expressApp: app });
-
     app.listen(config.port, () => {
         Logger.info(`
       ################################################
@@ -20,7 +18,4 @@ async function startServer() {
         process.exit(1);
     });
 }
-
 startServer();
-
-//changes
