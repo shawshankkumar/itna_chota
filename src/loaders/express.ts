@@ -36,6 +36,9 @@ export default ({ app }: { app: express.Application }): void => {
 
     // Load API routes
     app.use('/api', routes());
+    app.get('/:code', (req, res) => {
+        res.redirect(`https://itnachota.vercel.app/${req.params.code}`);
+    });
     app.get('*', (req, res) => {
         res.redirect('https://itnachota.vercel.app/');
     });
