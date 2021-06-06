@@ -19,7 +19,8 @@ crafted with <span style="color: #8b0000;">&hearts;</span> by your friend <a hre
 </div>
 <br>
 <br>
-check out the front-end part of the website here: [itnachotaclient](https://github.com/shawshankkumar/itnachotaclient)
+check out the front-end part of the website here: 
+[itnachotaclient](https://github.com/shawshankkumar/itnachotaclient)
 
 Use the api:
 
