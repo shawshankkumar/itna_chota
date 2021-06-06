@@ -12,11 +12,35 @@ crafted with <span style="color: #8b0000;">&hearts;</span> by your friend <a hre
 
 > Spam their dms with love, not long urls! 💖
 
-## Preview 📺
+## Preview (The hosted website) 📺
 
 <div align="center">
   <img alt="Screenshot" src="Public/Screenshot.png" />
 </div>
+
+check out the front-end part of the website here: [itnachotaclient](https://github.com/shawshankkumar/itnachotaclient)
+
+Use the api:
+
+Create a short url:
+
+```
+POST : https://itnachota.herokuapp.com/api/create/link
+```
+
+Sample payload= {"link":"www.shashankkumar.xyz"}
+
+Fetch the long url:
+
+```
+GET : "https://itnachota.herokuapp.com/api/fetch/link?code=<the 6 digit code received as response>"
+```
+
+Or use the website:
+
+```
+itnachota.shashankkumar.xyz
+```
 
 ## Installation 🔧
 
