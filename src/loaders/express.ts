@@ -3,7 +3,6 @@ import cors from 'cors';
 import * as express from 'express';
 import helmet from 'helmet';
 import routes from '../api';
-import config from '../config';
 
 export default ({ app }: { app: express.Application }): void => {
     /**
@@ -38,9 +37,9 @@ export default ({ app }: { app: express.Application }): void => {
     // Load API routes
     app.use('/api', routes());
     app.get('/:code', (req, res) => {
-        res.redirect(`${config.CLIENT_URL}${req.params.code}`);
+        res.redirect(`https://itnachota.vercel.app/${req.params.code}`);
     });
     app.get('*', (req, res) => {
-        res.redirect(config.CLIENT_URL);
+        res.redirect('https://itnachota.vercel.app/');
     });
 };

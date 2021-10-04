@@ -23,7 +23,7 @@ export default {
     logs: {
         level: process.env.LOG_LEVEL || 'silly',
     },
-    CLIENT_URL: process.env.CLIENT_URL,
+
     /**
      * API configs
      */
