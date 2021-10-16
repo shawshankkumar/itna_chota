@@ -33,7 +33,7 @@ export default ({ app }: { app: express.Application }): void => {
     app.use(cors());
 
     // Middleware that transforms the raw string of req.body into json
-    app.use(bodyParser.json());
+    app.use(express.json());
 
     // Load API routes
     app.use('/api', routes());
