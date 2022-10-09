@@ -3,12 +3,11 @@ import { createLink, fetchLink } from './controller';
 import * as yup from 'yup';
 import LoggerInstance from '../loaders/logger';
 
-const bodyParser = require('body-parser');
+
 
 const app = express();
-
-app.use(bodyParser.urlencoded({ extended: true }));
-
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 export const routerHandler = () => {
     app.post('/create/link', createLinkHandler);
     app.get('/fetch/link/', fetchLinkHandler);
