@@ -12,8 +12,7 @@ export const updateCache = async () => {
         if (!cache) await initCache();
         let urlData = await (await db()).collection('itnachota').find({}).toArray();
         urlData.forEach(async data => {
-            await setCache(data.url, data.urlCode);
-            await setCache(data.urlCode, data.url);
+            await Promise.all([setCache(data.url, data.urlCode), setCache(data.urlCode, data.url)]);
         });
     } catch (error) {
         LoggerInstance.error(error.messages);
