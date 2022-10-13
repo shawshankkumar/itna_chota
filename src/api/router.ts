@@ -3,8 +3,6 @@ import { createLink, fetchLink } from './controller';
 import * as yup from 'yup';
 import LoggerInstance from '../loaders/logger';
 
-
-
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -14,42 +12,29 @@ export const routerHandler = () => {
     return app;
 };
 
-const createLinkHandler = (req: Request, res: Response) => {
-    const linkSchema = yup.object().shape({ link: yup.string().required() });
-    linkSchema
-        .validate(req.body)
-        .then(() => {
-            createLink(req.body.link as string)
-                .then(code => {
-                    res.status(201).json({ succces: true, message: 'url shortened!', code: code });
-                })
-                .catch(error => {
-                    res.status(error.code).json({ code: error.code, success: false, message: error.message });
-                });
-        })
-        .catch(err => {
-            LoggerInstance.error(err.message);
-            res.status(400).json({ success: false, message: err.message });
-        });
+const createLinkHandler = async (req: Request, res: Response) => {
+    try {
+        const linkSchema = yup.object().shape({ link: yup.string().required() });
+        await linkSchema.validate(req.body);
+        const code = await createLink(req.body.link as string);
+        res.status(201).json({ succces: true, message: 'url shortened!', code: code });
+    } catch (err) {
+        LoggerInstance.error(err.message);
+        res.status(err.code || 400).json({ success: false, message: err.message });
+    }
 };
 
-const fetchLinkHandler = (req: express.Request, res: express.Response) => {
-    const fetchSchema = yup.object().shape({
-        code: yup.string().length(6).required(),
-    });
-    fetchSchema
-        .validate(req.query)
-        .then(() => {
-            fetchLink(req.query.code as string)
-                .then(link => {
-                    res.status(200).json({ link: link, success: true, message: 'original link fetched' });
-                })
-                .catch(error => {
-                    res.status(error.code).json({ code: error.code, success: false, message: error.message });
-                });
-        })
-        .catch(err => {
-            LoggerInstance.error(err.message);
-            res.status(400).json({ success: false, message: err.message });
+const fetchLinkHandler = async (req: express.Request, res: express.Response) => {
+    try {
+        const fetchSchema = yup.object().shape({
+            code: yup.string().length(6).required(),
         });
+
+        await fetchSchema.validate(req.query);
+        const link = await fetchLink(req.query.code as string);
+        res.status(200).json({ link: link, success: true, message: 'original link fetched' });
+    } catch (err) {
+        LoggerInstance.error(err.message);
+        res.status(err.code || 400).json({ success: false, message: err.message });
+    }
 };
